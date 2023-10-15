@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.AdminMapper">
+    <update id="updateById">
+        update admin set username=#{username},phone=#{phone},email= #{email},password=#{password},update_time = #{update_time} where id= #{id}
+    </update>
+    <delete id="deleteById">
+        delete from admin where id = #{id}
+    </delete>
+    <select id="list" resultType="com.example.springboot.entity.Admin">
+        select * from admin
+    </select>
+    <select id="listByCondition" resultType="com.example.springboot.entity.Admin">
+        select * from admin
+        <where>
+            <if test=" username!=null and username!='' ">
+                username like concat('%',#{ username },'%')
+            </if>
+        </where>
+        order by id desc
+    </select>
+    <select id="selectById" resultType="com.example.springboot.entity.Admin">
+        select * from admin where id = #{id}
+    </select>
+    <!--添加会员-->
+    <insert id="add"> insert into admin(username,phone,email,password)
+        values(#{username},#{phone},#{email},#{password})
+    </insert>
+</mapper>

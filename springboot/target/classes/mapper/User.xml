@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.UserMapper">
+    <update id="updateById">
+        update user set name=#{name},age=#{age},sex=#{sex},phone=#{phone},address= #{address},update_time = #{update_time} where id= #{id}
+    </update>
+    <delete id="deleteById">
+        delete from user where id = #{id}
+    </delete>
+    <select id="list" resultType="com.example.springboot.entity.User">
+        select * from user
+    </select>
+    <select id="listByCondition" resultType="com.example.springboot.entity.User">
+   select * from user
+        <where>
+            <if test=" name!=null and name!='' ">
+                name like concat('%',#{ name },'%')
+            </if>
+            <if test=" address!=null and address!='' ">
+                and address like concat('%',#{ address },'%')
+            </if>
+
+        </where>
+        order by id desc
+    </select>
+    <select id="selectById" resultType="com.example.springboot.entity.User">
+        select * from user where id = #{id}
+    </select>
+    <!--添加会员-->
+    <insert id="add"> insert into user(name,username,age,sex,phone,address)
+        values(#{name},#{username},#{age},#{sex},#{phone},#{address})
+    </insert>
+</mapper>
