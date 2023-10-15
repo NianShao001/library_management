@@ -16,7 +16,7 @@ public class SpringbootApplication {
 
 @GetMapping
     public String health(){
-        //成功
+        //返回成功
         return "SUCCESS";
 }
 }
